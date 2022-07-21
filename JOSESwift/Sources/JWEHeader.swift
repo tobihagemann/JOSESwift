@@ -301,11 +301,11 @@ extension JWEHeader: CommonHeaderParameterSpace {
     /// Header Parameters Used for ECDH Key Agreement - Ephemeral Public Key
     public var epk: ECPublicKey? {
         get {
-            guard let jwkParameters = parameters["epk"] as? [String: String] else {
+            guard let jwkParameters = parameters["epk"] else {
                 return nil
             }
 
-            guard let json = try? JSONEncoder().encode(jwkParameters) else {
+            guard let json = try? JSONSerialization.data(withJSONObject: jwkParameters) else {
                 return nil
             }
 
