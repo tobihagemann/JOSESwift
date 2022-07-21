@@ -2,6 +2,7 @@
 // By Luke Park, 2018
 
 import CommonCrypto
+import Foundation
 
 public class SwiftGCM {
     private static let keySize128: Int = 16
