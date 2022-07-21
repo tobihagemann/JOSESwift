@@ -30,6 +30,8 @@ extension ContentEncryptionAlgorithm {
                return .SHA512
            case .A128CBCHS256:
                return .SHA256
+           case .A256GCM:
+               fatalError("A256GCM should never call HMACAlgorithm")
            }
        }
 
@@ -37,7 +39,7 @@ extension ContentEncryptionAlgorithm {
            switch self {
            case .A256CBCHS512:
                return 64
-           case .A128CBCHS256:
+           case .A128CBCHS256, .A256GCM:
                return 32
            }
        }
@@ -46,6 +48,8 @@ extension ContentEncryptionAlgorithm {
            switch self {
            case .A128CBCHS256, .A256CBCHS512:
                return 16
+           case .A256GCM:
+               return 12
            }
        }
 
@@ -53,7 +57,7 @@ extension ContentEncryptionAlgorithm {
            switch self {
            case .A256CBCHS512:
                return key.count == 64
-           case .A128CBCHS256:
+           case .A128CBCHS256, .A256GCM:
                return key.count == 32
            }
        }
@@ -67,12 +71,13 @@ extension ContentEncryptionAlgorithm {
 
                return (inputKey.subdata(in: 0..<32), inputKey.subdata(in: 32..<64))
 
-           case .A128CBCHS256:
+           case .A128CBCHS256, .A256GCM:
                guard checkKeyLength(for: inputKey) else {
                    throw JWEError.keyLengthNotSatisfied
                }
                return (inputKey.subdata(in: 0..<16), inputKey.subdata(in: 16..<32))
            }
+        
        }
 
        func authenticationTag(for hmac: Data) -> Data {
@@ -81,6 +86,8 @@ extension ContentEncryptionAlgorithm {
                return hmac.subdata(in: 0..<32)
            case .A128CBCHS256:
                return hmac.subdata(in: 0..<16)
+           case .A256GCM:
+               fatalError("A256GCM should never call authenticationTag")
            }
        }
 }

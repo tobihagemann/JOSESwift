@@ -235,3 +235,56 @@ class AESCBCContentEncryptionTests: XCTestCase {
         XCTAssertEqual(cryptData, plaintext)
     }
 }
+
+class A256GCMContentEncryptionTests: XCTestCase {
+    /*
+     The final result in this example (with line breaks for display
+       purposes only) is:
+
+         eyJhbGciOiJSU0EtT0FFUCIsImVuYyI6IkEyNTZHQ00ifQ.
+         OKOawDo13gRp2ojaHV7LFpZcgV7T6DVZKTyKOMTYUmKoTCVJRgckCL9kiMT03JGe
+         ipsEdY3mx_etLbbWSrFr05kLzcSr4qKAq7YN7e9jwQRb23nfa6c9d-StnImGyFDb
+         Sv04uVuxIp5Zms1gNxKKK2Da14B8S4rzVRltdYwam_lDp5XnZAYpQdb76FdIKLaV
+         mqgfwX7XWRxv2322i-vDxRfqNzo_tETKzpVLzfiwQyeyPGLBIO56YJ7eObdv0je8
+         1860ppamavo35UgoRdbYaBcoh9QcfylQr66oc6vFWXRcZ_ZT2LawVCWTIy3brGPi
+         6UklfCpIMfIjf7iGdXKHzg.
+         48V1_ALb6US04U3b.
+         5eym8TW_c8SuK0ltJ3rpYIzOeDQz7TALvtu6UG9oMo4vpzs9tX_EFShS8iB7j6ji
+         SdiwkIr3ajwQzaBtQD_A.
+         XFBoMYUZodetZdvTiFvSkQ
+     */
+    /// Tests the `AES` encryption implementation for AES_128_CBC_HMAC_SHA_256 with the test data provided in the [RFC-7518](https://tools.ietf.org/html/rfc7518#appendix-B.1).
+    func testEncryptingA256GCM() {
+        let plaintext = "The true sign of intelligence is not knowledge but imagination.".data(using: .utf8)!
+        let additionalAuthenticatedData: Data = Data(bytes: [101, 121, 74, 104, 98, 71, 99, 105, 79, 105, 74, 83, 85, 48, 69,
+        116, 84, 48, 70, 70, 85, 67, 73, 115, 73, 109, 86, 117, 89, 121, 73,
+        54, 73, 107, 69, 121, 78, 84, 90, 72, 81, 48, 48, 105, 102, 81] as [UInt8], count: 46)
+        let algorithm = ContentEncryptionAlgorithm.A128CBCHS256
+        let cek: Data = Data(bytes: [177, 161, 244, 128, 84, 143, 225, 115, 63, 180, 3, 255, 107, 154,
+                                     212, 246, 138, 7, 110, 91, 112, 46, 34, 105, 47, 130, 203, 46, 122,
+                                     234, 64, 252] as [UInt8], count: 32) // CEK from example
+        let encrypter = A256GCMEncryption(contentEncryptionAlgorithm: algorithm, contentEncryptionKey: cek)
+        let symmetricEncryptionContext = try! encrypter.encrypt(plaintext, additionalAuthenticatedData: additionalAuthenticatedData)  // no .base64URLEncodedData() here
+
+        let expectedAuthenticationTag = Data(bytes: [92, 80, 104, 49, 133, 25, 161, 215, 173, 101, 219, 211, 136, 91,
+        210, 145] as [UInt8], count: 16)
+
+        print("expectedAuthenticationTag")
+        print(expectedAuthenticationTag.toHexadecimal())
+        print("authenticationTag")
+        print(symmetricEncryptionContext.authenticationTag.toHexadecimal())
+        XCTAssertEqual(expectedAuthenticationTag, symmetricEncryptionContext.authenticationTag)
+
+        let expectedCipherText = Data(bytes: [229, 236, 166, 241, 53, 191, 115, 196, 174, 43, 73, 109, 39, 122,
+            233, 96, 140, 206, 120, 52, 51, 237, 48, 11, 190, 219, 186, 80, 111,
+            104, 50, 142, 47, 167, 59, 61, 181, 127, 196, 21, 40, 82, 242, 32,
+            123, 143, 168, 226, 73, 216, 176, 144, 138, 247, 106, 60, 16, 205,
+            160, 109, 64, 63, 192] as [UInt8], count: 63)
+
+        print("expectedCipherText")
+        print(expectedCipherText.toHexadecimal())
+        print("ciphertext")
+        print(symmetricEncryptionContext.ciphertext.toHexadecimal())
+        XCTAssertEqual(expectedCipherText, symmetricEncryptionContext.ciphertext)
+    }
+}

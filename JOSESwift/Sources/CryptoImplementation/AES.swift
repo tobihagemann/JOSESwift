@@ -40,6 +40,9 @@ fileprivate extension ContentEncryptionAlgorithm {
 
         case .A128CBCHS256:
             return CCAlgorithm(kCCAlgorithmAES)
+
+        case .A256GCM:
+            fatalError("A256GCM should never call ccAlgorithm")
         }
     }
 
@@ -50,6 +53,9 @@ fileprivate extension ContentEncryptionAlgorithm {
 
         case .A128CBCHS256:
             return key.count == kCCKeySizeAES128
+
+        case .A256GCM:
+            fatalError("A256GCM should never call checkAESKeyLength")
         }
     }
 }
@@ -122,6 +128,8 @@ enum AES {
             }
 
             return ciphertext
+        case .A256GCM:
+            fatalError("A256GCM should never call checkAESKeyLength")
         }
     }
 
@@ -162,6 +170,8 @@ enum AES {
             }
 
             return plaintext
+        case .A256GCM:
+            fatalError("A256GCM should never call checkAESKeyLength")
         }
     }
 
