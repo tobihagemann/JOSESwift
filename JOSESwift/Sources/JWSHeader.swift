@@ -233,3 +233,14 @@ extension JWSHeader: CommonHeaderParameterSpace {
         }
     }
 }
+
+public extension JWSHeader {
+    var hub: [String: String]? {
+        get {
+            return parameters["hub"] as? [String: String]
+        }
+        set {
+            parameters["hub"] = newValue
+        }
+    }
+}
