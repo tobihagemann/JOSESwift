@@ -16,42 +16,15 @@ struct A256GCMEncryption {
         self.contentEncryptionAlgorithm = contentEncryptionAlgorithm
         self.contentEncryptionKey = contentEncryptionKey
     }
-    /*
-     See: https://tools.ietf.org/html/rfc7516 -
-     3.3.  Example JWE
-     A.1.  Example JWE using RSAES-OAEP and AES GCM
-     */
+
     func encrypt(_ plaintext: Data, additionalAuthenticatedData: Data) throws -> ContentEncryptionContext {
-        /*
-         
-         Assemble the final representation: The Compact Serialization of this
-         result is the string BASE64URL(UTF8(JWE Protected Header)) || '.' ||
-         BASE64URL(JWE Encrypted Key) || '.' || BASE64URL(JWE Initialization
-         Vector) || '.' || BASE64URL(JWE Ciphertext) || '.' || BASE64URL(JWE
-         Authentication Tag).
-         
-         */
-        //key is in RSA-OAEP (elsewhere)
-       
-        let iv =  Data(bytes: [227, 197, 117, 252, 2, 219, 233, 68, 180, 225, 77, 219] as [UInt8], count: 12)
-        let nonce: Data = Data() // todo what where?
-        let plaintext: Data = "The true sign of intelligence is not knowledge but imagination.".data(using: .utf8)!
-        /*
-          Let the Additional Authenticated Data encryption parameter be
-          ASCII(BASE64URL(UTF8(JWE Protected Header))).  This value is:
-        */
-        
-
-        let tagSize = SwiftGCM.tagSize128
-        let gcmEnc: SwiftGCM = try SwiftGCM(key: contentEncryptionKey, nonce: iv, tagSize: SwiftGCM.tagSize128)  // inferred from example length = SwiftGCM.tagSize128
-        let ciphertextAndTag: Data = try gcmEnc.encrypt(auth: additionalAuthenticatedData, plaintext: plaintext)
-        let authenticationTag = ciphertextAndTag.suffix(tagSize) // extract the last [tagsize] bytes
-        let ciphertext = ciphertextAndTag.prefix(ciphertextAndTag.count - authenticationTag.count) // extract everything before the [tagsize] bytes
-
+        let key = CryptoKit.SymmetricKey(data: contentEncryptionKey)
+        let nonce = CryptoKit.AES.GCM.Nonce()
+        let encrypted = try CryptoKit.AES.GCM.seal(plaintext, using: key, nonce: nonce, authenticating: additionalAuthenticatedData)
         return ContentEncryptionContext(
-            ciphertext: ciphertext,
-            authenticationTag: authenticationTag,
-            initializationVector: iv
+            ciphertext: encrypted.ciphertext,
+            authenticationTag: encrypted.tag,
+            initializationVector: encrypted.nonce.withUnsafeBytes({ Data(Array($0)) })
         )
     }
 
@@ -61,7 +34,11 @@ struct A256GCMEncryption {
         additionalAuthenticatedData: Data,
         authenticationTag: Data
     ) throws -> Data {
-        return Data()
+        let key = CryptoKit.SymmetricKey(data: contentEncryptionKey)
+        let nonce = try CryptoKit.AES.GCM.Nonce(data: initializationVector)
+        let encrypted = try CryptoKit.AES.GCM.SealedBox(nonce: nonce, ciphertext: ciphertext, tag: authenticationTag)
+        let decrypted = try CryptoKit.AES.GCM.open(encrypted, using: key, authenticating: additionalAuthenticatedData)
+        return decrypted
     }
 }
 

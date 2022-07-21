@@ -98,14 +98,13 @@
 		65F44EB11FE2D941000C5EA0 /* JWK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44EB01FE2D941000C5EA0 /* JWK.swift */; };
 		65F44EB31FE2E1C6000C5EA0 /* RSAKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F44EB21FE2E1C6000C5EA0 /* RSAKeys.swift */; };
 		65FBFDE71F45CC7C005C7D68 /* JOSESwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 65FBFDE51F45CC7C005C7D68 /* JOSESwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		66E19B352474BE05000AC795 /* A256GCMEncryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E19B342474BE05000AC795 /* A256GCMEncryption.swift */; };
 		7402BE932626FC4A0012801E /* HMACSigner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7402BE922626FC4A0012801E /* HMACSigner.swift */; };
 		7402BE972626FC610012801E /* HMACVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7402BE962626FC610012801E /* HMACVerifier.swift */; };
 		7402BEA726274D390012801E /* HMACSignerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7402BEA626274D390012801E /* HMACSignerTests.swift */; };
 		7402BEAB26274D430012801E /* HMACVerifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7402BEAA26274D430012801E /* HMACVerifierTests.swift */; };
 		7402BEAF26274DA40012801E /* HMACCryptoTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7402BEAE26274DA40012801E /* HMACCryptoTestCase.swift */; };
 		7402BEB526288DCD0012801E /* JWSHMACTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7402BEB426288DCD0012801E /* JWSHMACTests.swift */; };
-		66E19B352474BE05000AC795 /* A256GCMEncryption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E19B342474BE05000AC795 /* A256GCMEncryption.swift */; };
-		66E19B372474C220000AC795 /* GCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E19B362474C220000AC795 /* GCM.swift */; };
 		8A30B8F822118FD0001834E3 /* DeflateWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A30B8F722118FD0001834E3 /* DeflateWrapper.swift */; };
 		8A30B8FA22118FE6001834E3 /* JWECompressionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A30B8F922118FE6001834E3 /* JWECompressionTests.swift */; };
 		8A4B08B22213FF0600828536 /* Compressor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A4B08B12213FF0600828536 /* Compressor.swift */; };
@@ -240,14 +239,13 @@
 		65FBFDE21F45CC7C005C7D68 /* JOSESwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JOSESwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65FBFDE51F45CC7C005C7D68 /* JOSESwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JOSESwift.h; sourceTree = "<group>"; };
 		65FBFDE61F45CC7C005C7D68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66E19B342474BE05000AC795 /* A256GCMEncryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A256GCMEncryption.swift; sourceTree = "<group>"; };
 		7402BE922626FC4A0012801E /* HMACSigner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACSigner.swift; sourceTree = "<group>"; };
 		7402BE962626FC610012801E /* HMACVerifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACVerifier.swift; sourceTree = "<group>"; };
 		7402BEA626274D390012801E /* HMACSignerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACSignerTests.swift; sourceTree = "<group>"; };
 		7402BEAA26274D430012801E /* HMACVerifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACVerifierTests.swift; sourceTree = "<group>"; };
 		7402BEAE26274DA40012801E /* HMACCryptoTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HMACCryptoTestCase.swift; sourceTree = "<group>"; };
 		7402BEB426288DCD0012801E /* JWSHMACTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWSHMACTests.swift; sourceTree = "<group>"; };
-		66E19B342474BE05000AC795 /* A256GCMEncryption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A256GCMEncryption.swift; sourceTree = "<group>"; };
-		66E19B362474C220000AC795 /* GCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCM.swift; sourceTree = "<group>"; };
 		8A30B8F722118FD0001834E3 /* DeflateWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeflateWrapper.swift; sourceTree = "<group>"; };
 		8A30B8F922118FE6001834E3 /* JWECompressionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWECompressionTests.swift; sourceTree = "<group>"; };
 		8A4B08B12213FF0600828536 /* Compressor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compressor.swift; sourceTree = "<group>"; };
@@ -626,7 +624,6 @@
 				612B0C93248E1C83009F1929 /* Thumbprint.swift */,
 				396DD6D0257FB068008353B9 /* ECDHKeyAgreement.swift */,
 				396DD6DE257FB13C008353B9 /* ECKeyPair.swift */,
-				66E19B362474C220000AC795 /* GCM.swift */,
 			);
 			path = CryptoImplementation;
 			sourceTree = "<group>";
@@ -841,7 +838,6 @@
 				65617FCB1F90F8C700D8C743 /* Encrypter.swift in Sources */,
 				65E733CC1FEBE8320009EAC6 /* JWKExtensions.swift in Sources */,
 				396DD6DF257FB13C008353B9 /* ECKeyPair.swift in Sources */,
-				66E19B372474C220000AC795 /* GCM.swift in Sources */,
 				6536560D2035DF8300A3AC3B /* JWKSetCodable.swift in Sources */,
 				6546FB0F2029DD10002E421F /* SecKeyRSAPublicKey.swift in Sources */,
 				6572C2F21F96428800D4186D /* Decrypter.swift in Sources */,
@@ -992,7 +988,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1052,7 +1048,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

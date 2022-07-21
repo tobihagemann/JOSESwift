@@ -129,7 +129,7 @@ enum AES {
 
             return ciphertext
         case .A256GCM:
-            fatalError("A256GCM should never call checkAESKeyLength")
+            fatalError("A256GCM should never call encrypt")
         }
     }
 
@@ -171,7 +171,7 @@ enum AES {
 
             return plaintext
         case .A256GCM:
-            fatalError("A256GCM should never call checkAESKeyLength")
+            fatalError("A256GCM should never call decrypt")
         }
     }
 
